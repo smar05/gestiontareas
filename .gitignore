@@ -54,3 +54,4 @@ Thumbs.db
 # Ignore IDE specific files for backend
 /backend/.idea/
 backend/.vscode/
+/backend/src/main/resources/db/tasks.json
