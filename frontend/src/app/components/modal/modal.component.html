@@ -1,0 +1,74 @@
+<div
+  class="modal fade"
+  id="taskModal"
+  tabindex="-1"
+  aria-labelledby="taskModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="taskForm" (submit)="submit()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="taskModalLabel">Nueva tarea</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="title" class="form-label">Titulo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="taskName"
+              required
+              [(ngModel)]="task.title"
+              name="title"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripcion</label>
+            <textarea
+              class="form-control"
+              id="taskDescription"
+              rows="3"
+              required
+              [(ngModel)]="task.description"
+              name="description"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Fecha de vencimiento</label>
+            <input
+              type="date"
+              class="form-control"
+              id="taskDueDate"
+              required
+              [(ngModel)]="task.date"
+              name="date"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!validSubmit()"
+          >
+            {{ idTask ? "Actualizar tarea" : "Guardar tarea" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
