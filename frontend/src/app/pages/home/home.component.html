@@ -24,7 +24,7 @@
         <div>
           <h6 class="mb-0">{{ task.title }}</h6>
           <small class="text-muted"
-            >Fecha de vencimiento: {{ task.date }}</small
+            >Fecha de vencimiento: {{ task.date | date }}</small
           >
         </div>
         <div>
@@ -40,4 +40,4 @@
   </div>
 </div>
 
-<app-modal />
+<app-modal id="modal" #modal />

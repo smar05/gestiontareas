@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ITask } from 'src/app/interfaces/i-task';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -8,10 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  public tasks: ITask[] = [
-    { id: 1, title: 'Titulo', description: 'Descripcion', date: '2024' },
-    { id: 2, title: 'Titulo2', description: 'Descripcion', date: '2024' },
-  ];
+  public tasks: ITask[] = [];
 
   constructor(private apiService: ApiService) {}
 

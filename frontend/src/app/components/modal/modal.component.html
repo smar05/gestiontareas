@@ -7,7 +7,7 @@
 >
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="taskForm">
+      <form id="taskForm" (submit)="submit()">
         <div class="modal-header">
           <h5 class="modal-title" id="taskModalLabel">Nueva tarea</h5>
           <button
@@ -19,23 +19,37 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="taskName" class="form-label">Titulo</label>
-            <input type="text" class="form-control" id="taskName" required />
+            <label for="title" class="form-label">Titulo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="taskName"
+              required
+              [(ngModel)]="task.title"
+              name="title"
+            />
           </div>
           <div class="mb-3">
-            <label for="taskDescription" class="form-label">Descripcion</label>
+            <label for="description" class="form-label">Descripcion</label>
             <textarea
               class="form-control"
               id="taskDescription"
               rows="3"
               required
+              [(ngModel)]="task.description"
+              name="description"
             ></textarea>
           </div>
           <div class="mb-3">
-            <label for="taskDueDate" class="form-label"
-              >Fecha de vencimiento</label
-            >
-            <input type="date" class="form-control" id="taskDueDate" required />
+            <label for="date" class="form-label">Fecha de vencimiento</label>
+            <input
+              type="date"
+              class="form-control"
+              id="taskDueDate"
+              required
+              [(ngModel)]="task.date"
+              name="date"
+            />
           </div>
         </div>
         <div class="modal-footer">
@@ -46,7 +60,13 @@
           >
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary">Guardar tarea</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!validSubmit()"
+          >
+            Guardar tarea
+          </button>
         </div>
       </form>
     </div>

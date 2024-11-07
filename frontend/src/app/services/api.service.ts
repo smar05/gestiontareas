@@ -14,4 +14,8 @@ export class ApiService {
   public getTasks(): Observable<ITask[]> {
     return this.http.get(`${this.backUrl}/tasks`) as any;
   }
+
+  public newTask(task: ITask): Observable<any> {
+    return this.http.post(`${this.backUrl}/tasks`, task);
+  }
 }
