@@ -108,7 +108,7 @@ docker pull smar05/gestiontareas:latest
 
 Se ha desplegado en un servidor público. Puedes acceder al API en la siguiente URL:
 
-[https://puntored-latest.onrender.com](https://gestiontareas.onrender.com)
+https://gestiontareas.onrender.com
 
 # Frontend del Proyecto
 
@@ -153,7 +153,7 @@ Esto creará una carpeta dist con los archivos necesarios para el despliegue del
 
 El aplicativo se desplego en un servicio de hosting en la siguiente url:
 
-[https://punto-red.netlify.app](https://gestion-tareas-front.netlify.app/)
+https://gestion-tareas-front.netlify.app
 
 # Contacto
 
