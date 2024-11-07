@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ITask } from 'src/app/interfaces/i-task';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -29,5 +29,9 @@ export class HomeComponent implements OnInit {
     this.apiService.deleteTask(id).subscribe(() => {
       this.getTasks();
     });
+  }
+
+  public onModalClose(): void {
+    this.getTasks();
   }
 }
