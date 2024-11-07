@@ -12,12 +12,26 @@ import java.util.List;
 
 @Service
 public class TaskService {
-    private final String FILE_PATH = "src/main/resources/db/tasks.json";
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private String FILE_PATH;
+    private final ObjectMapper objectMapper;
+
+    public TaskService() {
+        this.FILE_PATH = "src/main/resources/db/tasks.json";
+        this.objectMapper = new ObjectMapper();
+    }
+
+    public TaskService(String filePath, ObjectMapper objectMapper) {
+        this.FILE_PATH = filePath;
+        this.objectMapper = objectMapper;
+    }
 
     public List<Task> getAllTasks() {
         try {
-            return objectMapper.readValue(new File(FILE_PATH),
+            final File file = new File(FILE_PATH);
+            if (!file.exists() || file.length() == 0) {
+                return new ArrayList<>();
+            }
+            return objectMapper.readValue(file,
                     objectMapper.getTypeFactory().constructCollectionType(List.class, Task.class));
         } catch (IOException e) {
             return new ArrayList<>();
