@@ -18,4 +18,8 @@ export class ApiService {
   public newTask(task: ITask): Observable<any> {
     return this.http.post(`${this.backUrl}/tasks`, task);
   }
+
+  public deleteTask(id: number): Observable<any> {
+    return this.http.delete(`${this.backUrl}/tasks/${id}`);
+  }
 }

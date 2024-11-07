@@ -24,5 +24,10 @@ export class HomeComponent implements OnInit {
 
   public editTask(): void {}
 
-  public deleteTask(): void {}
+  public deleteTask(id: number | undefined): void {
+    if (!id) return;
+    this.apiService.deleteTask(id).subscribe(() => {
+      this.getTasks();
+    });
+  }
 }
