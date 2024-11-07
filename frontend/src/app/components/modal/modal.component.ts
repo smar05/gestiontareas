@@ -38,7 +38,8 @@ export class ModalComponent {
           description: null as any,
           date: null as any,
         };
-      } else if (this.taskEdit) {
+      }
+      if (this.taskEdit) {
         this.task = this.taskEdit;
       }
     }
