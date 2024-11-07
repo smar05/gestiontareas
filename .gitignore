@@ -4,6 +4,7 @@
 /frontend/.angular
 /frontend/.env
 /frontend/.env.*
+/frontend/coverage
 
 # Ignore IDE/editor files
 .idea/
