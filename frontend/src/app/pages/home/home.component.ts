@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITask } from 'src/app/interfaces/i-task';
+import { AlertService } from 'src/app/services/alert.service';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -12,16 +13,28 @@ export class HomeComponent implements OnInit {
   public idEdit: number = null as any;
   public taskEdit: ITask = null as any;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private alertService: AlertService
+  ) {}
 
   public ngOnInit(): void {
     this.getTasks();
   }
 
   private getTasks(): void {
-    this.apiService.getTasks().subscribe((tasks) => {
-      this.tasks = tasks;
-    });
+    this.apiService.getTasks().subscribe(
+      (tasks) => {
+        this.tasks = tasks;
+      },
+      (_err) => {
+        this.alertService.basicAlert(
+          'Error',
+          'Ha ocurrido un error consultando las tareas',
+          'error'
+        );
+      }
+    );
   }
 
   public editTask(id: number | undefined): void {
@@ -32,9 +45,23 @@ export class HomeComponent implements OnInit {
 
   public deleteTask(id: number | undefined): void {
     if (!id) return;
-    this.apiService.deleteTask(id).subscribe(() => {
-      this.getTasks();
-    });
+    this.apiService.deleteTask(id).subscribe(
+      () => {
+        this.getTasks();
+        this.alertService.basicAlert(
+          'Listo',
+          'Se ha eliminado la tarea',
+          'success'
+        );
+      },
+      (_error) => {
+        this.alertService.basicAlert(
+          'Error',
+          'Ha ocurrido un error eliminando la tarea',
+          'error'
+        );
+      }
+    );
   }
 
   public onModalClose(): void {

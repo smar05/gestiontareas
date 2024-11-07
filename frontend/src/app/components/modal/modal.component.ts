@@ -6,6 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ITask } from 'src/app/interfaces/i-task';
+import { AlertService } from 'src/app/services/alert.service';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -24,7 +25,10 @@ export class ModalComponent {
     date: null as any,
   };
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private alertService: AlertService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['idTask'] && changes['taskEdit']) {
@@ -42,13 +46,41 @@ export class ModalComponent {
 
   public submit(): void {
     if (this.idTask) {
-      this.apiService.editTask(this.idTask, this.task).subscribe(() => {
-        this.modalClosed.emit();
-      });
+      this.apiService.editTask(this.idTask, this.task).subscribe(
+        () => {
+          this.modalClosed.emit();
+          this.alertService.basicAlert(
+            'Listo',
+            'Se ha editado la tarea',
+            'success'
+          );
+        },
+        (_err) => {
+          this.alertService.basicAlert(
+            'Error',
+            'Ha ocurrido un error actualizando la tarea',
+            'error'
+          );
+        }
+      );
     } else {
-      this.apiService.newTask(this.task).subscribe(() => {
-        this.modalClosed.emit();
-      });
+      this.apiService.newTask(this.task).subscribe(
+        () => {
+          this.modalClosed.emit();
+          this.alertService.basicAlert(
+            'Listo',
+            'Se ha creado la tarea',
+            'success'
+          );
+        },
+        (_error) => {
+          this.alertService.basicAlert(
+            'Error',
+            'Ha ocurrido un error creando la tarea',
+            'error'
+          );
+        }
+      );
     }
   }
 
