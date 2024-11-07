@@ -19,16 +19,19 @@
     <ul class="list-group list-group-flush" id="taskList">
       <li
         class="list-group-item d-flex justify-content-between align-items-center"
+        *ngFor="let task of tasks"
       >
         <div>
-          <h6 class="mb-0">Titulo tarea</h6>
-          <small class="text-muted">Due date: 2024-11-15</small>
+          <h6 class="mb-0">{{ task.title }}</h6>
+          <small class="text-muted"
+            >Fecha de vencimiento: {{ task.date }}</small
+          >
         </div>
         <div>
-          <button class="btn btn-sm btn-warning me-2" onclick="editTask()">
+          <button class="btn btn-sm btn-warning me-2" (click)="editTask()">
             Editar
           </button>
-          <button class="btn btn-sm btn-danger" onclick="deleteTask()">
+          <button class="btn btn-sm btn-danger" (click)="deleteTask()">
             Eliminar
           </button>
         </div>
