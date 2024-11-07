@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ITask } from 'src/app/interfaces/i-task';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -9,6 +15,8 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ModalComponent {
   @Output() modalClosed = new EventEmitter<void>();
+  @Input() idTask!: number;
+  @Input() taskEdit!: ITask;
 
   public task: ITask = {
     title: null as any,
@@ -18,10 +26,30 @@ export class ModalComponent {
 
   constructor(private apiService: ApiService) {}
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['idTask'] && changes['taskEdit']) {
+      if (!this.idTask) {
+        this.task = {
+          title: null as any,
+          description: null as any,
+          date: null as any,
+        };
+      } else if (this.taskEdit) {
+        this.task = this.taskEdit;
+      }
+    }
+  }
+
   public submit(): void {
-    this.apiService.newTask(this.task).subscribe(() => {
-      this.modalClosed.emit();
-    });
+    if (this.idTask) {
+      this.apiService.editTask(this.idTask, this.task).subscribe(() => {
+        this.modalClosed.emit();
+      });
+    } else {
+      this.apiService.newTask(this.task).subscribe(() => {
+        this.modalClosed.emit();
+      });
+    }
   }
 
   public validSubmit(): boolean {

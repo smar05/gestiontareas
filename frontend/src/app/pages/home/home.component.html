@@ -7,6 +7,7 @@
       class="btn btn-primary"
       data-bs-toggle="modal"
       data-bs-target="#taskModal"
+      (click)="save()"
     >
       + Añadir tarea
     </button>
@@ -28,7 +29,12 @@
           >
         </div>
         <div>
-          <button class="btn btn-sm btn-warning me-2" (click)="editTask()">
+          <button
+            class="btn btn-sm btn-warning me-2"
+            (click)="editTask(task.id)"
+            data-bs-toggle="modal"
+            data-bs-target="#taskModal"
+          >
             Editar
           </button>
           <button class="btn btn-sm btn-danger" (click)="deleteTask(task.id)">
@@ -40,4 +46,10 @@
   </div>
 </div>
 
-<app-modal id="modal" #modal (modalClosed)="onModalClose()" />
+<app-modal
+  id="modal"
+  #modal
+  (modalClosed)="onModalClose()"
+  [idTask]="idEdit"
+  [taskEdit]="taskEdit"
+/>

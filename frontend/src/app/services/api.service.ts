@@ -22,4 +22,8 @@ export class ApiService {
   public deleteTask(id: number): Observable<any> {
     return this.http.delete(`${this.backUrl}/tasks/${id}`);
   }
+
+  public editTask(id: number, task: ITask): Observable<any> {
+    return this.http.put(`${this.backUrl}/tasks/${id}`, task);
+  }
 }

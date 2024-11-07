@@ -65,7 +65,7 @@
             class="btn btn-primary"
             [disabled]="!validSubmit()"
           >
-            Guardar tarea
+            {{ idTask ? "Actualizar tarea" : "Guardar tarea" }}
           </button>
         </div>
       </form>

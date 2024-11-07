@@ -9,6 +9,8 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class HomeComponent implements OnInit {
   public tasks: ITask[] = [];
+  public idEdit: number = null as any;
+  public taskEdit: ITask = null as any;
 
   constructor(private apiService: ApiService) {}
 
@@ -22,7 +24,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  public editTask(): void {}
+  public editTask(id: number | undefined): void {
+    if (!id) return;
+    this.idEdit = id;
+    this.taskEdit = this.tasks.find((task) => task.id === id) as any;
+  }
 
   public deleteTask(id: number | undefined): void {
     if (!id) return;
@@ -32,6 +38,13 @@ export class HomeComponent implements OnInit {
   }
 
   public onModalClose(): void {
+    this.editTask = null as any;
+    this.idEdit = null as any;
     this.getTasks();
+  }
+
+  public save(): void {
+    this.idEdit = null as any;
+    this.taskEdit = null as any;
   }
 }
